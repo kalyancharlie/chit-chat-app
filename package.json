@@ -1,0 +1,30 @@
+{
+  "name": "riktam-group-chat-app",
+  "version": "1.0.0",
+  "description": "Group Chat App",
+  "main": "index.js",
+  "engines": {
+    "node": "=14.0.0",
+    "npm": "=6.14.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalyancharlie/riktam-group-chat-app.git"
+  },
+  "keywords": [
+    "Group",
+    "Chat"
+  ],
+  "author": "Kalyan Chinna Bathula",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kalyancharlie/riktam-group-chat-app/issues"
+  },
+  "homepage": "https://github.com/kalyancharlie/riktam-group-chat-app#readme",
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  }
+}
