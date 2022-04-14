@@ -13,7 +13,6 @@ const Chats = () => {
       <div className="chats__main-container">
         <Search />
         <ChatList />
-        <button>Create</button>
       </div>
     </div>
   )

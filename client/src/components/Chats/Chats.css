@@ -19,8 +19,29 @@
   justify-content: flex-start;
   align-items: center;
   /* padding: 2.5rem 2.813rem; */
-  padding: 1rem 1.7rem 1rem;
+  padding: 1.5rem 1.7rem 2rem;
   gap: 1rem;
+  position: relative;
+}
+
+.create-group-btn {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  outline: none;
+  padding: 0.225rem 0.45rem;
+  background-color: #e7e2e2;
+  border: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 100;
 }
 
 /* Icon Styles */
@@ -36,6 +57,12 @@
   align-items: center;
 }
 
+.icon__xxs {
+  font-size: 0.6rem;
+  width: 20px;
+  height: 20px;
+}
+
 .icon__xs {
   font-size: 0.8rem;
   width: 30px;
@@ -44,14 +71,14 @@
 
 .icon__sm {
   font-size: 1.2rem;
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
 }
 
 .icon__md {
   font-size: 1.7rem;
-  width: 75px;
-  height: 75px;
+  width: 4.688rem;
+  height: 4.688rem;
 }
 
 .icon__lg {
@@ -78,10 +105,12 @@
   background-color: white;
   border-radius: 5px;
   margin: 5px;
+  margin-right: 0;
+  margin-top: 0;
   /* padding: 15px; */
-  max-height: calc(100% - 112px);
+  max-height: calc(100% - 132px);
   overflow-y: scroll;
-  min-height: calc(100% - 112px);
+  min-height: calc(100% - 132px);
 }
 
 /* Search Component */

@@ -4,7 +4,6 @@ import ChatItem from './ChatItem'
 const ChatList = () => {
   return (
     <div className='chat-list__container'>
-      {/* <ChatItem />
       <ChatItem />
       <ChatItem />
       <ChatItem />
@@ -18,7 +17,8 @@ const ChatList = () => {
       <ChatItem />
       <ChatItem />
       <ChatItem />
-      <ChatItem /> */}
+      <ChatItem />
+      <ChatItem />
     </div>
   )
 }

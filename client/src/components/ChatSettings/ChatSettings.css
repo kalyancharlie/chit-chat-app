@@ -1,0 +1,10 @@
+:root {
+  --chat-settings-container-max-width: 450px;
+}
+
+.chat-settings__container {
+  background-color: #F0F2F5;
+  width: 486px;
+  min-height: 100vh;
+}
+

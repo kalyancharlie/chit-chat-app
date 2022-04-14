@@ -1,12 +1,18 @@
-import './reset.css'
-import './App.css';
-import Chats from './components/Chats'
+import "./reset.css";
+import "./App.css";
+import Chats from "./components/Chats";
+import ChatScreen from "./components/ChatScreen";
+import ChatSettings from "./components/ChatSettings";
 
 function App() {
   return (
-    <>
+    <div className="flex fs">
       <Chats />
-    </>
+      <div className="flex fs">
+        <ChatScreen />
+        <ChatSettings />
+      </div>
+    </div>
   );
 }
 
