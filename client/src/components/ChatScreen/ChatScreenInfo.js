@@ -9,7 +9,7 @@ const ChatScreenInfo = () => {
     <div className='chat-screen-info__container'>
       <Icon firstName='Kalyan' lastName='Bathula' classNames={['icon__sm', 'chat-info-icon']} />
       <p style={{fontWeight: 600}}>Youtube DSA Discussion</p>
-      {/* <ChatMemberCount /> */}
+      <ChatMemberCount />
       {/* <IoMenuOutline className="menu-icon" title='Group/Chat Settings' /> */}
     </div>
   )
