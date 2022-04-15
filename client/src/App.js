@@ -5,10 +5,12 @@ import ChatScreen from "./components/ChatScreen";
 import ChatSettings from "./components/ChatSettings";
 import ProfileSettings from './components/ProfileSettings'
 import LoginPage from "./pages/LoginPage/LoginPage";
+import AdminDashboardPage from './pages/AdminDashboardPage/AdminDashboardPage'
 
 function App() {
   return (
-    <LoginPage />
+    <AdminDashboardPage />
+    // <LoginPage />
     // <div className="app-container">
     //   <Chats />
     //   <div className="flex fs">
