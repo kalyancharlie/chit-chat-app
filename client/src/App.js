@@ -6,7 +6,7 @@ import ChatSettings from "./components/ChatSettings";
 
 function App() {
   return (
-    <div className="flex fs">
+    <div className="app-container">
       <Chats />
       <div className="flex fs">
         <ChatScreen />

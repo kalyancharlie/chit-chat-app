@@ -6,7 +6,7 @@ const SearchUserItem = () => {
   return (
     <div className='search-user-item__container'>
       <Icon firstName='Kalyan' lastName='Bathula' classNames={['icon__sm', 'search-user-icon']} />
-      <p>Srihari Bathula</p>
+      <p className='search-user__name'>Srihari Bathula</p>
       <FaUserPlus className='add-user-icon' title='Add User' />
     </div>
   )

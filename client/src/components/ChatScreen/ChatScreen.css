@@ -8,12 +8,13 @@
   position: relative;
   /* REMOVE LATER CHANGE LATER */
   /* width: 100%; */
-  width: 700px;
+  /* width: 700px; */
   height: 100vh;
   /* max-width: var(--chats_container_width); */
-  min-width: var(--chats_screen_container_min_width);
+  /* min-width: var(--chats_screen_container_min_width); */
   background-color: var(--cs_bg);
   padding: 2rem;
+  flex-basis: 70%;
   /* border: 2px solid black; */
 }
 

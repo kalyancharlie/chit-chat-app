@@ -10,6 +10,21 @@ const SearchUsersList = () => {
       <SearchUserItem />
       <SearchUserItem />
       <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
+      <SearchUserItem />
     </div>
   )
 }
