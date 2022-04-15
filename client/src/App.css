@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.open-modal {
+  display: flex !important;
+}
+
 .flex {
   display: flex;
   justify-content: center;

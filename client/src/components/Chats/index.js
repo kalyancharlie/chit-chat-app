@@ -5,6 +5,7 @@ import Search from '../Search'
 import ChatList from './ChatList'
 
 import './Chats.css'
+import SearchNewUsersList from './SearchNewUsersList'
 
 const Chats = () => {
   return (
@@ -13,6 +14,7 @@ const Chats = () => {
       <div className="chats__main-container">
         <Search />
         <ChatList />
+        {/* <SearchNewUsersList /> */}
       </div>
     </div>
   )

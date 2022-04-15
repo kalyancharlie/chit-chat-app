@@ -203,3 +203,7 @@
   background-color: rgba(0, 128, 0, 0.895);
   margin: auto;
 }
+
+.active-chat {
+  background-color: #c2e3ff;
+}
