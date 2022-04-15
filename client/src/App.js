@@ -3,6 +3,7 @@ import "./App.css";
 import Chats from "./components/Chats";
 import ChatScreen from "./components/ChatScreen";
 import ChatSettings from "./components/ChatSettings";
+import ProfileSettings from './components/ProfileSettings'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <ChatScreen />
         <ChatSettings />
       </div>
+      <ProfileSettings />
     </div>
   );
 }
