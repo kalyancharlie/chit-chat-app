@@ -225,6 +225,7 @@
 
 .close-icon {
   margin-left: auto;
+  cursor: pointer;
 }
 
 .modal-body {

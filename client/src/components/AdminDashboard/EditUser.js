@@ -7,7 +7,7 @@ const EditUser = () => {
       <div className="modal user-modal">
         <div className="modal-header">
           <h3>Edit User</h3>
-          <AiOutlineClose className='close-icon' />
+          <AiOutlineClose className='close-icon' title='Click to close' />
         </div>
         <div className="modal-body">
           <input type="text" placeholder='First Name' className='admin-user-input' />

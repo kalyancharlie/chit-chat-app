@@ -4,6 +4,7 @@ import AdminHeader from "../../components/AdminDashboard/AdminHeader";
 import AdminPanel from "../../components/AdminDashboard/AdminPanel";
 import EditUser from "../../components/AdminDashboard/EditUser";
 import ProfileSettings from "../../components/ProfileSettings";
+import ConfirmModal from '../../components/ConfirmModal'
 import "./styles.css";
 
 const AdminDashboardPage = () => {
@@ -12,6 +13,7 @@ const AdminDashboardPage = () => {
       <AdminHeader />
       <AdminPanel />
       <ProfileSettings />
+      <ConfirmModal />
       {/* <AddUser /> */}
       {/* <EditUser /> */}
     </div>
