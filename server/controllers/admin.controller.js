@@ -64,7 +64,7 @@ const removeUser = async(req, res, next) => {
 // Get All Users
 const getAllUsers = async(req, res, next) => {
   try {
-    const allUsers = await User.find({}, {_id: 1, firstName: 1, lastName: 1, emailId: 1})
+    const allUsers = await User.find({isAdmin: false}, {_id: 1, firstName: 1, lastName: 1, emailId: 1})
     if (!allUsers) {
       return res.status(400).json({status: false, statusCode: 400, message: 'Error in getting Users List', users: []})
     }
@@ -101,9 +101,12 @@ const getQueriedUsers = async(req, res, next) => {
           {firstName: {$regex: query, $options: 'i'}},
           {lastName: {$regex: query, $options: 'i'}},
           {emailId: {$regex: query, $options: 'i'}}
+        ],
+        $and: [
+          {isAdmin: false}
         ]
       }
-    }])
+    }]).sort({createdAt: 1})
     if (!queriedUsers) {
       return res.status(400).json({status: false, statusCode: 400, message: 'Users Not Found', users: []})
     }

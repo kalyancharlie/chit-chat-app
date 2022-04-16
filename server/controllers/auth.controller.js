@@ -23,7 +23,7 @@ const authenticateAdmin = async(req, res, next) => {
       return res.status(401).json({status: false, statusCode: 401, message: 'Invalid Credentials'})
     }
     const {firstName, lastName, _id} = searchUser
-    res.json({status: true, statusCode: 200, message: 'User Authentication Success', user: {firstName, lastName, emailId, _id, token: generateToken(_id)}})
+    res.json({status: true, statusCode: 200, message: 'User Authentication Success', user: {firstName, lastName, emailId, _id, token: generateToken(_id), isAdmin: true}})
   } catch (error) {
     log(error)
     res.json({status: false, statusCode: 500, message: 'Internal Server Error', error: {...error}})
@@ -43,7 +43,7 @@ const authenticateUser = async(req, res, next) => {
       return res.status(401).json({status: false, statusCode: 401, message: 'Invalid Credentials'})
     }
     const {firstName, lastName, _id} = searchUser
-    res.json({status: true, statusCode: 200, message: 'User Authentication Success', user:{firstName, lastName, emailId, _id, token: generateToken(_id)}})
+    res.json({status: true, statusCode: 200, message: 'User Authentication Success', user:{firstName, lastName, emailId, _id, token: generateToken(_id), isAdmin: false}})
   } catch (error) {
     log(error)
     res.json({status: false, statusCode: 500, message: 'Internal Server Error', error: {...error}})
