@@ -207,6 +207,14 @@
   max-width: 100%;
 }
 
+.open-modal {
+  display: flex;
+}
+
+.close-modal {
+  display: none;
+}
+
 .modal-header {
   display: flex;
   justify-content: center;

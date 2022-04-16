@@ -128,6 +128,7 @@
 }
 
 .login-error-icon {
+  display: none;
   margin-left: auto;
   color: #cc3434;
   font-size: 1.2rem;
@@ -182,4 +183,15 @@
   text-align: center;
   color:rgba(120, 120, 120, 0.84);
   padding-bottom: 8px;
+}
+
+/* Error Active Class */
+.error-active {
+  display: flex;
+}
+
+/* Disabled Btn Class */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
