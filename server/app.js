@@ -11,6 +11,7 @@ dotenv.config();
 // Routers
 const adminRouter = require('./routes/adminRouter')
 const authRouter = require('./routes/authRouter')
+const chatsRouter = require('./routes/chatsRouter')
 
 const MODE = process.env.MODE || 'prod'
 const LOG_MODE = MODE === 'prod' ? 'tiny' : 'dev'
@@ -32,6 +33,7 @@ app.use(cookieParser());
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', adminRouter);
+app.use('/api/v1/chats', chatsRouter);
 
 // Static Files Serving
 if (process.env.NODE_ENV === 'production') {

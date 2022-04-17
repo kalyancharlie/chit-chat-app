@@ -14,13 +14,13 @@ export const SEARCH_USERS = '/api/v1/users/search?q='
 
 // CHAT APIS
 // GET
-export const GET_CHATS = '/api/v1/chats/all'
+export const GET_CHATS = '/api/v1/chats/all/'
 // POST senderId targetId
 export const START_CHAT = '/api/v1/chats/start-chat'
 // POST - groupName, userId
-export const CREATE_GROUP = '/api/v1/chats/create/'
+export const CREATE_GROUP = '/api/v1/chats/create-group/'
 // DELETE - groupId, userId
-export const REMOVE_GROUP = '/api/v1/chats/remove/'
+export const REMOVE_GROUP = '/api/v1/chats/remove-group/'
 // POST - groupId, userId
 export const ADD_TO_GROUP = '/api/v1/chats/add-to-group/'
 // PATCH - groupId, userId
@@ -39,3 +39,4 @@ export const SEND_MESSAGE = '/api/v1/chats/messages/'
 // GET
 export const ADMIN_SIGIN = 'api/v1/auth/signin/admin'
 export const USER_SIGIN = 'api/v1/auth/signin/user'
+ 
