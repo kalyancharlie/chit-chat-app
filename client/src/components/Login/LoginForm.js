@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiUser } from "react-icons/bi";
 import { VscError, VscLock } from "react-icons/vsc";
 import { IoMdInformationCircle } from "react-icons/io";
@@ -6,10 +6,10 @@ import log from "../../utils/logger";
 import {verifyUserLogin} from '../../api/AuthAPI'
 import {EMAIL_REGEX} from '../../constants/constants'
 import {useNavigate} from 'react-router-dom'
-import { AppContext } from "../../App";
+import useAppContext from "../../hooks/useAppContext";
 
 const LoginForm = () => {
-  const {setUser} = useContext(AppContext)
+  const {setUser} = useAppContext()
   const navigator = useNavigate();
   const [loginType, setLoginType] = useState({ isUser: true, isAdmin: false });
   const [error, setError] = useState({emailId: false, password: false})

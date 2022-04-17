@@ -1,21 +1,29 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./reset.css";
 import "./App.css";
 import Media from "react-media";
 import DesktopAppRoutes from "./routes/DesktopAppRoutes";
 import MobileAppRoutes from "./routes/MobileAppRoutes";
+import useMediaQuery from './hooks/useMediaQuery'
 
 // Application Context
 export const AppContext = React.createContext();
 
 function App() {
+  const [activeChat, setActiveChat] = useState(null)
+  const isMobileView = useMediaQuery("(max-width: 450px)")
   const [chats, setChats] = useState(null)
   const [chatSettings, setChatSettings] = useState(null);
   const [user, setUser] = useState({_id: '', firstName: '', lastName: '', emailId: '', token: '', isAdmin: false})
   const [showProfileSettings, setShowProfileSettings] = useState(false)
+  
+  useEffect(() => {
+    console.log('mobile view status ' + isMobileView)
+  }, [isMobileView])
+  
   return (
     <AppContext.Provider
-      value={{ chats, setChats, chatSettings, setChatSettings, user, setUser, showProfileSettings, setShowProfileSettings }}
+      value={{ chats, setChats, chatSettings, setChatSettings, user, setUser, showProfileSettings, setShowProfileSettings, activeChat, setActiveChat, isMobileView }}
     >
       <Media
         queries={{

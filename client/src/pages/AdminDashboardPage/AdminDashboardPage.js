@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { AdminPageContext } from "../../contexts/AdminPageContext";
 import AddUser from "../../components/AdminDashboard/AddUser";
 import AdminHeader from "../../components/AdminDashboard/AdminHeader";
@@ -7,12 +7,12 @@ import EditUser from "../../components/AdminDashboard/EditUser";
 import ProfileSettings from "../../components/ProfileSettings";
 import ConfirmModal from "../../components/AdminDashboard/ConfirmModal";
 import "./styles.css";
-import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
+import useAppContext from "../../hooks/useAppContext";
 
 const AdminDashboardPage = () => {
   const navigator = useNavigate();
-  const { user, setUser } = useContext(AppContext);
+  const { user, setUser } = useAppContext()
   const [registeredUsers, setRegisteredUsers] = useState([]);
   const [isAddUserModalOpen, setIsAddUserModalOpen] = useState(false);
   const [isEditUserModalOpen, setIsEditUserModalOpen] = useState(false);
@@ -50,6 +50,9 @@ const AdminDashboardPage = () => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     console.log("local storage", userInfo);
     if (!userInfo) {
+      return navigator("/login", { message: "Session Expired. Login Again" });
+    }
+    if (userInfo.token === '') {
       return navigator("/login", { message: "Session Expired. Login Again" });
     }
     setUser(() => userInfo);

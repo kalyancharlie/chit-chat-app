@@ -1,10 +1,10 @@
-import React, {useContext} from 'react'
-import { AdminPageContext } from '../../contexts/AdminPageContext'
+import React from 'react'
 
 import { AiOutlineClose } from 'react-icons/ai'
+import useAdminContext from '../../hooks/useAdminContext'
 
 const ConfirmModal = () => {
-  const { confirmModalState, confirmModalAccepted, confirmModalRejected } = useContext(AdminPageContext);
+  const { confirmModalState, confirmModalAccepted, confirmModalRejected } = useAdminContext()
   return (
     <div className={`${confirmModalState.isOpen ? 'modal-overlay open-modal' : 'modal-overlay close-modal'}`}>
       <div className="modal user-modal">

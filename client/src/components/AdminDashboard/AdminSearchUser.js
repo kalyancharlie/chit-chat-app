@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { AdminPageContext } from "../../contexts/AdminPageContext";
+import React from "react";
 import {removeUser} from '../../api/AdminAPI'
+import useAdminContext from "../../hooks/useAdminContext";
 
 const AdminSearchUser = ({firstName, lastName, emailId, _id, setCurrentEditUser, removeUserHandler}) => {
-  const {setIsEditUserModalOpen} = useContext(AdminPageContext)
+  const {setIsEditUserModalOpen} = useAdminContext()
   return (
     <tr>
       <td>{firstName}</td>

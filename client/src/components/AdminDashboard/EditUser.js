@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
-import { AppContext } from '../../App'
-import { AdminPageContext } from '../../contexts/AdminPageContext'
 import { updateUser } from '../../api/AdminAPI'
+import useAdminContext from '../../hooks/useAdminContext'
 
 const EditUser = () => {
-  const {isEditUserModalOpen, setIsEditUserModalOpen, registeredUsers, currentEditUser} = useContext(AdminPageContext)
+  const {isEditUserModalOpen, setIsEditUserModalOpen, registeredUsers, currentEditUser} = useAdminContext();
   const [formState, setFormState] = useState({})
 
   useEffect(() => {

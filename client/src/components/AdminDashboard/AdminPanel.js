@@ -1,14 +1,12 @@
-import React, {useContext, useEffect, useState} from "react";
-import { AdminPageContext } from '../../contexts/AdminPageContext'
+import React, {useEffect, useState} from "react";
 import Search from "../Search";
 import AdminSearchResults from "./AdminSearchResults";
 import { FaUserPlus } from "react-icons/fa";
 import {getUsersInfo, searchUsers} from '../../api/AdminAPI'
-
+import useAdminContext from "../../hooks/useAdminContext";
 
 const AdminPanel = () => {
-  const {setIsAddUserModalOpen, isAddUserModalOpen } = useContext(AdminPageContext);
-  const {registeredUsers, setRegisteredUsers} = useContext(AdminPageContext)
+  const {setIsAddUserModalOpen, isAddUserModalOpen, registeredUsers, setRegisteredUsers } = useAdminContext();
   const [searchText, setSearchText] = useState("");
 
    // Get Registered Users

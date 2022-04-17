@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import AdminSearchUser from "./AdminSearchUser";
 import {removeUser} from '../../api/AdminAPI'
-import { AdminPageContext } from "../../contexts/AdminPageContext";
+import useAdminContext from "../../hooks/useAdminContext";
 
 const AdminSearchResults = ({registeredUsers}) => {
-  const {setCurrentEditUser} = useContext(AdminPageContext)
+  const {setCurrentEditUser} = useAdminContext()
 
   return (
     <div className="admin-search-results__container">

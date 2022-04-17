@@ -1,13 +1,13 @@
-import React, {useContext} from "react";
+import React from "react";
 import Icon from "../Icon";
 import {IoLogOutSharp} from 'react-icons/io5'
 import { AiFillDashboard } from "react-icons/ai";
-import {AppContext} from '../../App'
 import {useNavigate} from 'react-router-dom'
+import useAppContext from "../../hooks/useAppContext";
 
 const AdminHeader = ({user}) => {
   const navigator = useNavigate()
-  const {setUser, setShowProfileSettings, showProfileSettings} = useContext(AppContext)
+  const {setUser, setShowProfileSettings, showProfileSettings} = useAppContext();
   console.log("userdetails", user)
   
   // Toggle Profile Details
