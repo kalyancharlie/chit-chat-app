@@ -20,6 +20,7 @@ function App() {
     isAdmin: false,
   });
   const [showProfileSettings, setShowProfileSettings] = useState(false);
+  const [isShowGroupModal, setIsShowGroupModal] = useState(false);
 
   useEffect(() => {
     console.log("mobile view status " + isMobileView);
@@ -39,6 +40,8 @@ function App() {
         activeChat,
         setActiveChat,
         isMobileView,
+        isShowGroupModal, 
+        setIsShowGroupModal
       }}
     >
       {isMobileView ? <MobileAppRoutes /> : <DesktopAppRoutes />}

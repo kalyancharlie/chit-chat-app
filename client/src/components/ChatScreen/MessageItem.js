@@ -21,7 +21,7 @@ const MessageItem = ({ content, sender, time, likes }) => {
         <div className="message-header__container">
           <h5 className="message-sender">{sender}</h5>
           <div className="message-likes__container">
-            <p>{likes}</p>
+            {likes > 0 && <p>{likes}</p>} 
             <BiLike className="like-icon" />
           </div>
         </div>

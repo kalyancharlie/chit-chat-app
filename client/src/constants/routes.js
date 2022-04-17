@@ -25,6 +25,9 @@ export const SEARCH_USERS = '/api/v1/users/search?q='
 // GET - :userId
 export const GET_CHATS = '/api/v1/chats/all/'
 
+// GET - senderId&chatId
+export const GET_GROUP_MEMBERS = '/api/v1/chats/members'
+
 // POST ?senderId&targetUserId
 export const START_CHAT = '/api/v1/chats/start-chat'
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './ChatSettings.css'
 import {FiLogOut} from 'react-icons/fi'
 import GroupInfo from './GroupInfo'
@@ -9,7 +9,9 @@ import useAppContext from '../../hooks/useAppContext'
 
 const ChatSettings = () => {
   const navigator = useNavigate()
-  const {setUser} = useAppContext()
+  const {setUser, activeChat} = useAppContext()
+  const [groupMembers, setGroupMembers] = useState([])
+
   // Logout Handler
   const logoutHandler = (e) => {
     e.preventDefault()
@@ -22,9 +24,8 @@ const ChatSettings = () => {
       <button className='logout-btn' title='Click to Logout' onClick={logoutHandler}><FiLogOut /><span>Logout</span></button>
       <div className='chat-settings-main__container'>
         <GroupInfo />
-        <SearchUser />
-        <hr className='hr' />
-        <GroupMembersList />
+        {activeChat?.isGroupChat && <SearchUser groupMembers={groupMembers} setGroupMembers={setGroupMembers} />}
+        <GroupMembersList groupMembers={groupMembers} setGroupMembers={setGroupMembers} />
       </div>
     </div>
   )

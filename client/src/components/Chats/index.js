@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import UserInfo from './UserInfo'
 import Search from '../Search'
@@ -8,13 +8,13 @@ import './Chats.css'
 import SearchNewUsersList from './SearchNewUsersList'
 
 const Chats = () => {
+  const [searchUserText, setSearchUserText] = useState('')
   return (
     <div className='chats__container'>
       <UserInfo />
       <div className="chats__main-container">
-        <Search />
-        <ChatList />
-        {/* <SearchNewUsersList /> */}
+        <Search setInputValue={setSearchUserText} textValue={searchUserText} />
+        {searchUserText ? <SearchNewUsersList searchUserText={searchUserText} setSearchUserText={setSearchUserText} /> : <ChatList />} 
       </div>
     </div>
   )

@@ -13,14 +13,29 @@ const getAllChats = async (req, res) => {
       .populate("latestMessage")
       .sort({ updatedAt: -1 })
       .then(async (results) => {
-        // results = await User.populate(results, {
-        //   path: "latestMessage.sender",
-        //   select: "firstName lastName emailId",
-        // });
-        res.status(200).send(results);
+        results = await User.populate(results, {
+          path: "latestMessage.sender",
+          select: "firstName lastName emailId",
+        });
+        res.status(200).send({status: true, statusCode: 200, chatsData: results, message: 'Chats Retrieved Successfully'});
       });
   } catch (error) {
     console.log('ERROR - GET ALL CHATS')
+    res.status(500).json({status: false, statusCode: 500, message: 'Internal Server Error', error})
+  }
+};
+
+// Get Group Members
+const getGroupMembers = async (req, res) => {
+  try {
+    const {senderId, chatId} = req.query
+    console.log(chatId)
+    const groupMembers = await Chat.findById({ _id: chatId }, {users: 1}).populate('users', '-password')
+    console.log(groupMembers)
+    res.status(200).send({status: true, statusCode: 200, groupMembersData: groupMembers, message: 'Group Members Retrieved Successfully'});
+  } catch (error) {
+    console.log('ERROR - GET Members list ')
+    console.log(error)
     res.status(500).json({status: false, statusCode: 500, message: 'Internal Server Error', error})
   }
 };
@@ -90,7 +105,8 @@ const createChatGroup = async (req, res, next) => {
       users: [senderId]
     })
     const createdGroup = await requestedGroup.save()
-    res.status(201).json({status: true, statusCode: 201, message: 'Chat Group Created Successfully', groupData: createdGroup})
+    const groupData = await Chat.findById({_id: requestedGroup._id}).populate('users', '-password').populate('groupAdmin', '-password')
+    res.status(201).json({status: true, statusCode: 201, message: 'Chat Group Created Successfully', groupData})
   } catch (error) {
     console.log(error)
     res.status(500).json({status: false, statusCode: 500, message: 'Internal Server Error', error: {...error}})
@@ -123,8 +139,8 @@ const addToChatGroup = async (req, res) => {
     const  {senderId, groupId, targetUserId} = req.query
     console.log(senderId, groupId, targetUserId)
     const privilegeCheck = await Chat.findOne({
-      _id: groupId,
-      groupAdmin: senderId}).populate('users', '-password')
+      _id: groupId
+      }).populate('users', '-password')
 
      if (!privilegeCheck) {
       return res.status(400).json({status: false, statusCode: 400, message: 'Bad Request! Please check the params.' })
@@ -193,7 +209,10 @@ const sendMessage = async (req, res, next) => {
     })
     console.log(requestedMessage)
     const createdMessage = await requestedMessage.save()
-    res.status(201).json({status: true, statusCode: 201, message: 'Messaged added to Chat', messageData: {message, senderId, chatId, messageId: requestedMessage._id }})
+    const updatedChat = await Chat.findByIdAndUpdate({_id: chatId}, {latestMessage: requestedMessage._id}, {new: true}).populate("users", "-password")
+    .populate("groupAdmin", "-password")
+    .populate("latestMessage")
+    res.status(201).json({status: true, statusCode: 201, message: 'Messaged added to Chat', chatData: updatedChat, messageData: {message, senderId, chatId, messageId: requestedMessage._id }})
   } catch (error) {
     console.log(error)
     res.status(500).json({status: false, statusCode: 500, message: 'Internal Server Error', error: {...error}})
@@ -248,4 +267,4 @@ const toggleLike = async (req, res) => {
 
 
 
-module.exports = {getAllChats, createChatGroup, createOrGetChat, removeChatGroup, addToChatGroup, removeFromChatGroup, sendMessage, toggleLike, getChatMessages}
+module.exports = {getAllChats, createChatGroup, createOrGetChat, removeChatGroup, addToChatGroup, removeFromChatGroup, sendMessage, toggleLike, getChatMessages, getGroupMembers}

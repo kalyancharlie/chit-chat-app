@@ -15,6 +15,14 @@ const LoginForm = () => {
   const [error, setError] = useState({emailId: false, password: false})
   const [formState, setFormState] = useState({emailId: 'kalyanchinna123@gmail.com', password: '12345'});
 
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    if (userInfo) {
+      setUser(() => ({...userInfo}))
+      navigator('/chats', {replace: true})
+    } 
+  }, [])
+
   // Login Type Listener
   const loginTypeListener = (e) => {
     if (e) e.preventDefault();

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   getAllChats,
+  getGroupMembers,
   createOrGetChat,
   createChatGroup,
   removeChatGroup,
@@ -18,9 +19,12 @@ const {guard} = require('../middlewares/authGuard')
 // Get All Chats of User - UserId
 router.get("/all/:userId", guard, getAllChats);
 
+// Get Group Members - senderId&chatId
+router.get("/members", getGroupMembers);
+
 // Create Chat - ?senderId&targetUserId=targetId
 router.post("/start-chat", guard, createOrGetChat);
-
+ 
 // Create Group - ?senderId, return groupId Obj
 router.post("/create-group", guard, createChatGroup);
 
