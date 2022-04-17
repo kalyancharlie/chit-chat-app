@@ -1,3 +1,4 @@
+import moment from 'moment'
 export const getIconLetters = (firstName = "", lastName = "") => {
   let letters = "";
   if (firstName.length >= 1) letters = firstName[0].toUpperCase();
@@ -11,3 +12,7 @@ export const getFirstAndLastName = (fullName = "") => {
   if (words.length === 1) return [words[0], ""];
   return [words[0], words[words.length - 1]]
 };
+
+export const getChatTime = (date) => {
+  return moment(date).startOf('day').fromNow(); 
+}

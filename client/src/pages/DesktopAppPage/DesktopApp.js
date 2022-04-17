@@ -18,7 +18,7 @@ const DesktopApp = () => {
     if (!userInfo) {
       return navigator("/login", { message: "Session Expired. Login Again" });
     }
-    if (userInfo.token === '') {
+    if (userInfo.token === '' || userInfo?.isAdmin) {
       return navigator("/login", { message: "Session Expired. Login Again" });
     }
     setUser(() => userInfo);

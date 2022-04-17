@@ -185,15 +185,30 @@
 
 /* Chat Activity Container Styles */
 .chat-activity__container {
+  display: flex;
+  justify-content: center;
+  align-items: fle;
+  gap: 0.1rem;
+  flex-direction: column;
   margin-left: auto;
 }
 
 .chat-last-time {
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   white-space: nowrap;
   margin-left: auto;
-  margin-top: 5px;
+  margin-top: 1px;
   margin-bottom: 6px;
+
+}
+
+.chat__notification {
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: rgba(0, 128, 0, 0.895);
+  margin-right: 8px;
+  margin-left: auto;
 }
 
 .unread {
@@ -201,7 +216,6 @@
   height: 5px;
   border-radius: 100%;
   background-color: rgba(0, 128, 0, 0.895);
-  margin: auto;
 }
 
 .active-chat {

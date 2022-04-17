@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
-import { AppContext } from "../../App";
+import React from "react";
 import GroupInfo from "../ChatSettings/GroupInfo";
 import "./ProfileSettings.css";
 import ProfileSettingsHeader from "./ProfileSettingsHeader";
 import ProfileSummary from "./ProfileSummary";
 import {useNavigate} from 'react-router-dom'
+import useAppContext from "../../hooks/useAppContext";
+import ProfileInfo from "./ProfileInfo";
 
 function ProfileSettings() {
   const navigator = useNavigate()
-  const {showProfileSettings, setShowProfileSettings, setUser, user} = useContext(AppContext)
+  const {showProfileSettings, setShowProfileSettings, setUser, user} = useAppContext()
   // Logout Handler
   const logoutHandler = (e) => {
     e.preventDefault()
@@ -22,7 +23,7 @@ function ProfileSettings() {
     <div className={`${showProfileSettings ? 'profile-settings__container absolute-left-pos profile-active' : 'profile-settings__container absolute-left-pos'}`}>
       <ProfileSettingsHeader />
       <div className="profile-settings-main__container">
-        <GroupInfo firstName={user.firstName} lastName={user.lastName} isAdmin={user.isAdmin} />
+        <ProfileInfo />
         <ProfileSummary />
         <button className="logout-fullspan" onClick={logoutHandler}>Logout</button>
       </div>

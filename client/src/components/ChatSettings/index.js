@@ -1,15 +1,15 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import './ChatSettings.css'
 import {FiLogOut} from 'react-icons/fi'
 import GroupInfo from './GroupInfo'
 import SearchUser from './SearchUser'
 import GroupMembersList from './GroupMembersList'
-import { AppContext } from '../../App'
 import {useNavigate} from 'react-router-dom'
+import useAppContext from '../../hooks/useAppContext'
 
 const ChatSettings = () => {
   const navigator = useNavigate()
-  const {setUser} = useContext(AppContext)
+  const {setUser} = useAppContext()
   // Logout Handler
   const logoutHandler = (e) => {
     e.preventDefault()

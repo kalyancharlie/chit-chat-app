@@ -1,8 +1,8 @@
-import React, {useContext} from 'react'
-import { AppContext } from '../../App'
+import React from 'react'
+import useAppContext from '../../hooks/useAppContext'
 
 function ProfileSummary() {
-  const {user} = useContext(AppContext)
+  const {user} = useAppContext()
   return (
     <div className='profile-summary__container'>
       <div className="profile-item">
