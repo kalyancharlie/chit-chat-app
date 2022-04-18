@@ -41,7 +41,7 @@ router.delete("/remove-from-group", guard, removeFromChatGroup);
 router.post("/messages", guard, sendMessage);
 
 // Get Messages for a Chat - ?chatId
-router.get("/messages", guard, getChatMessages);
+router.get("/messages",  getChatMessages);
 
 // Send Message to a Chat - ?sender&chatId&messageId
 router.post("/messages/toggle-like", guard,  toggleLike);

@@ -17,6 +17,11 @@ export const getChatTime = (date) => {
   return moment(date).startOf('day').fromNow(); 
 }
 
+export const getMessageTime = (date) => {
+  console.log('time', date)
+  return moment(date).format('LT'); 
+}
+
 export const isUserAlreadyInChat = (targetUserId="", usersList=[]) => {
   const results = usersList.filter(user => {
     if (!user?.isGroupChat) {
@@ -65,4 +70,12 @@ export const isGroupAdmin = (groupObj, userId) => {
 
 export const getObjById = (obj, userId) => {
   return obj?.find(user => user._id === userId)
+}
+
+export const isCurrentUser = (messageObj, userId) => {
+  return messageObj?.sender?._id === userId
+}
+
+export const getTargetUsersObj = (chatObj, userId) => {
+  return chatObj?.filter(user => user?._id !== userId)
 }

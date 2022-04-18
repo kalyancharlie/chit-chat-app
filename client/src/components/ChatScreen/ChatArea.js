@@ -1,14 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MessageList from "./MessageList";
 import SendMessage from "./SendMessage";
+import ScrollableFeed from "react-scrollable-feed";
+import { getChatMessages } from "../../api/ChatAPI";
+import useAppContext from "../../hooks/useAppContext";
+import io from "socket.io-client";
+
+const SOCKET_ENDPOINT = process.env.REACT_APP_SOCKETIO_SERVER;
+var socket, previouChat;
 
 const ChatArea = () => {
+  const { activeChat, user } = useAppContext();
+  const [chatMessages, setChatMessages] = useState([]);
+  // SOCKET CONNECTION SETUP
+
+  // Get Chat Messages
+  const fetchChatMessages = async () => {
+    try {
+      const resp = await getChatMessages({ chatId: activeChat?._id });
+      if (resp?.status && resp?.messagesData) {
+        const { messagesData } = resp;
+        console.log("success in mgs");
+        console.log("fetch msg rsp");
+        setChatMessages(() => messagesData);
+      }
+      socket?.emit("JOIN_CHAT", activeChat?._id);
+    } catch (error) {
+      console.log("error in g etting messages");
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    previouChat = activeChat;
+    if (!activeChat) return;
+    fetchChatMessages();
+  }, [activeChat]);
+
+  useEffect(() => {
+    socket = io(SOCKET_ENDPOINT);
+    socket.emit("CONNECTED_TO_SOCKET", user);
+  }, []);
+
+  // SOCKET LISTENER
+  useEffect(() => {
+    socket.on("RECEIVED_MESSAGE", (messageObj) => {
+      console.log("NEW MESSAGE RECEIVED", messageObj);
+      if (
+        !previouChat || // if chat is not selected or doesn't match current chat
+        previouChat._id !== messageObj.chat._id
+      ) {
+      } else {
+        console.log("NEW MESSAGE RECEIVED", messageObj);
+        setChatMessages([...chatMessages, messageObj]);
+      }
+    });
+  });
+
   return (
     <>
       <div className="chat-area__container">
-        <MessageList />
+        <MessageList chatMessages={chatMessages} />
       </div>
-      <SendMessage />
+      <SendMessage
+        socket={socket}
+        setChatMessages={setChatMessages}
+        chatMessages={chatMessages}
+      />
     </>
   );
 };

@@ -6,7 +6,7 @@ const User = require('../models/user.model')
 const getAllChats = async (req, res) => {
   try {
     const userId = req.params.userId
-    console.log(userId)
+    // console.log(userId)
     Chat.find({ users: { $elemMatch: { $eq: userId } } })
       .populate("users", "-password")
       .populate("groupAdmin", "-password")
@@ -29,9 +29,9 @@ const getAllChats = async (req, res) => {
 const getGroupMembers = async (req, res) => {
   try {
     const {senderId, chatId} = req.query
-    console.log(chatId)
+    // console.log(chatId)
     const groupMembers = await Chat.findById({ _id: chatId }, {users: 1}).populate('users', '-password')
-    console.log(groupMembers)
+    // console.log(groupMembers)
     res.status(200).send({status: true, statusCode: 200, groupMembersData: groupMembers, message: 'Group Members Retrieved Successfully'});
   } catch (error) {
     console.log('ERROR - GET Members list ')
@@ -44,7 +44,7 @@ const getGroupMembers = async (req, res) => {
 const createOrGetChat = async (req, res) => {
   try {
     const {senderId, targetUserId} = req.query
-    console.log(senderId, targetUserId)
+    // console.log(senderId, targetUserId)
     
     if (!senderId || !targetUserId) {
       return res.status(400).json({status: false, message: 'Bad Request. Missing UserID'});
@@ -66,7 +66,7 @@ const createOrGetChat = async (req, res) => {
       select: "updatedAt",
     });
 
-    console.log('chat availbel ', isChatAvailable)
+    // console.log('chat availbel ', isChatAvailable)
   
     // Chat already Available
     if (isChatAvailable) {
@@ -97,7 +97,7 @@ const createChatGroup = async (req, res, next) => {
   try {
     const senderId = req.query.senderId
     const {groupName} = req.body
-    console.log(senderId, groupName)
+    // console.log(senderId, groupName)
     const requestedGroup = new Chat({
       chatName: groupName,
       isGroupChat: true,
@@ -117,7 +117,7 @@ const createChatGroup = async (req, res, next) => {
 const removeChatGroup = async (req, res, next) => {
   try {
     const {senderId, chatId} = req.query
-    console.log(senderId, chatId)
+    // console.log(senderId, chatId)
     const targetGroup = await Chat.findOne({_id: chatId}).populate("groupAdmin", "-password")
     if (!targetGroup) {
       return res.status(400).json({status: false, statusCode: 400, message: 'Group Does not Exist!' })
@@ -137,7 +137,7 @@ const removeChatGroup = async (req, res, next) => {
 const addToChatGroup = async (req, res) => {
   try {
     const  {senderId, groupId, targetUserId} = req.query
-    console.log(senderId, groupId, targetUserId)
+    // console.log(senderId, groupId, targetUserId)
     const privilegeCheck = await Chat.findOne({
       _id: groupId
       }).populate('users', '-password')
@@ -149,7 +149,7 @@ const addToChatGroup = async (req, res) => {
      const userAlreadyExists= await Chat.findOne({_id: groupId, users: {
        $in: [targetUserId]
      }}).populate('users', '-password')
-     console.log('already exsits value', userAlreadyExists)
+    //  console.log('already exsits value', userAlreadyExists)
     //  User Not Available
     if (!userAlreadyExists) {
       const updatedChat = await Chat.findByIdAndUpdate({_id: groupId}, {$push: {
@@ -170,7 +170,7 @@ const addToChatGroup = async (req, res) => {
 const removeFromChatGroup = async (req, res) => {
   try {
     const  {senderId, groupId, targetUserId} = req.query
-    console.log(senderId, groupId, targetUserId)
+    // console.log(senderId, groupId, targetUserId)
     // Group Existence Check
     const isGroupExists = await Chat.findOne({_id: groupId})
     if (!isGroupExists) {
@@ -196,23 +196,32 @@ const sendMessage = async (req, res, next) => {
   try {
     const {senderId, chatId} = req.query
     const {message} = req.body
-    console.log('values', senderId, chatId)
+    // console.log('values', senderId, chatId)
     const isGroupExists = await Chat.findById({_id: chatId})
     if (!isGroupExists) {
       return res.status(400).json({status: false, statusCode: 400, message: 'Chat Not available.'})
     }
-    const requestedMessage = new Message({
+    const requestedMessage = {
       sender: senderId,
       chat: chatId,
       content: message,
       likedUsers: []
-    })
-    console.log(requestedMessage)
-    const createdMessage = await requestedMessage.save()
-    const updatedChat = await Chat.findByIdAndUpdate({_id: chatId}, {latestMessage: requestedMessage._id}, {new: true}).populate("users", "-password")
-    .populate("groupAdmin", "-password")
-    .populate("latestMessage")
-    res.status(201).json({status: true, statusCode: 201, message: 'Messaged added to Chat', chatData: updatedChat, messageData: {message, senderId, chatId, messageId: requestedMessage._id }})
+    }
+    // console.log(requestedMessage)
+    let createdMessage = await Message.create(requestedMessage)
+    createdMessage = await createdMessage.populate("sender", "firstName lastName emailId _id").execPopulate();
+    createdMessage = await createdMessage.populate("chat").execPopulate();
+    createdMessage = await createdMessage.populate('likedUsers').execPopulate();
+    createdMessage = await User.populate(createdMessage, {
+      path: "chat.users",
+      select: "firstName lastName emailId _id",
+    });
+
+    const updatedChat = await Chat.findByIdAndUpdate({_id: chatId}, {latestMessage: createdMessage._id}, {new: true})
+    // const updatedMessage = await Message.findById({_id: requestedMessage._id}).populate('sender', '-password').
+    // populate('chat', '-password')
+    // .populate('likedUsers', '-password')
+    res.status(201).json({status: true, statusCode: 201, message: 'Messaged added to Chat', messageData: createdMessage})
   } catch (error) {
     console.log(error)
     res.status(500).json({status: false, statusCode: 500, message: 'Internal Server Error', error: {...error}})
@@ -238,7 +247,7 @@ const getChatMessages = async (req, res, next) => {
 const toggleLike = async (req, res) => {
   try {
     const  {senderId, chatId, messageId} = req.query
-    console.log(senderId, chatId, messageId)
+    // console.log(senderId, chatId, messageId)
     // User in Group / Chat Check
     const isUserAvailable = await Chat.findOne({_id: chatId, users: {$elemMatch: {$eq: senderId}}})
     if (!isUserAvailable) {

@@ -121,3 +121,49 @@ export const removeUserFromGroup = async ({senderId, groupId, targetUserId}) => 
     return error?.response
   }
 };
+
+// SEND MESSAGE
+export const sendMessage = async ({senderId, chatId, message}) => {
+  try {
+    const resp = await API.post(SEND_MESSAGE,{message}, {params: {
+      senderId,
+      chatId
+    }})
+    const {data} = resp
+    return data
+  } catch (error) {
+    console.log('error in chat apis')
+    console.log(error)
+    return error?.response
+  }
+};
+
+// SEND MESSAGE
+export const getChatMessages = async ({ chatId}) => {
+  try {
+    const resp = await API.get(GET_CHAT_MESSAGES, {params: {
+      chatId
+    }})
+    const {data} = resp
+    return data
+  } catch (error) {
+    console.log('error in chat apis')
+    console.log(error)
+    return error?.response
+  }
+};
+
+// TOGGLE LIKE
+export const toggleLike = async ({ senderId, chatId, messageId}) => {
+  try {
+    const resp = await API.post(TOGGLE_LIKE,{}, {params: {
+      senderId, chatId, messageId
+    }})
+    const {data} = resp
+    return data
+  } catch (error) {
+    console.log('error in chat apis')
+    console.log(error)
+    return error?.response
+  }
+};
