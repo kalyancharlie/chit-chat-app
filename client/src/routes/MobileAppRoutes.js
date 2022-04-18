@@ -20,7 +20,7 @@ const MobileAppRoutes = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
-        <Route path="/" element={<MobileApp />}>
+        <Route path="/" exact element={<Navigate replace to="/login" />}>
           <Route path="chats" element={<Chats />}></Route>
           <Route path="chats/:chatid" element={<ChatScreen />} />
           <Route path="chats/:chatid/settings" element={<ChatSettings />} />

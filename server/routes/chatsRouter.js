@@ -20,7 +20,7 @@ const {guard} = require('../middlewares/authGuard')
 router.get("/all/:userId", guard, getAllChats);
 
 // Get Group Members - senderId&chatId
-router.get("/members", getGroupMembers);
+router.get("/members", guard, getGroupMembers);
 
 // Create Chat - ?senderId&targetUserId=targetId
 router.post("/start-chat", guard, createOrGetChat);
@@ -41,7 +41,7 @@ router.delete("/remove-from-group", guard, removeFromChatGroup);
 router.post("/messages", guard, sendMessage);
 
 // Get Messages for a Chat - ?chatId
-router.get("/messages",  getChatMessages);
+router.get("/messages", guard, getChatMessages);
 
 // Send Message to a Chat - ?sender&chatId&messageId
 router.post("/messages/toggle-like", guard,  toggleLike);
