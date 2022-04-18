@@ -20,9 +20,10 @@ io.on("connection", (socket) => {
     console.log("Connected to socket.io Server");
     // ADD USER TO SOCKET
     socket.on("CONNECTED_TO_SOCKET", (user) => {
+      // console.log(user)
       socket.join(user?._id);
-      socket.emit("CONNECTED");
-      console.log("User Joined:" + user?._id)
+      socket.emit("CONNECTED", null);
+      console.log("User Joined:" + user._id)
     });
   
     socket.on("JOIN_CHAT", (room) => {
@@ -31,8 +32,8 @@ io.on("connection", (socket) => {
     });
   
     socket.on("SEND_MESSAGE", (chatObj) => {
-      console.log('chat data received', chatObj)
-      console.log( chatObj)
+      // console.log('chat data received', chatObj)
+      // console.log( chatObj)
       if (!chatObj?.chat?.users) return console.log("No users Found");
   
       chatObj?.chat?.users.forEach((user) => {
@@ -42,7 +43,7 @@ io.on("connection", (socket) => {
       });
     });
   
-    socket.off("setup", () => {
+    socket.off("CONNECTED_TO_SOCKET", () => {
       console.log("USER DISCONNECTED");
       socket.leave(userData._id);
     });

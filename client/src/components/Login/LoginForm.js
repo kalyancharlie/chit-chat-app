@@ -42,7 +42,7 @@ const LoginForm = () => {
   // Validate Fields
   const validateFields = () => {
     let isInvalid = false
-    if(!EMAIL_REGEX.test(formState.emailId)) {
+    if(!formState.emailId) {
       setError((prev) => ({...prev, emailId: true}))
       isInvalid = true;
     } else {

@@ -32,15 +32,15 @@ const ChatArea = () => {
   };
 
   useEffect(() => {
-    previouChat = activeChat;
     if (!activeChat) return;
+    previouChat = activeChat;
     fetchChatMessages();
   }, [activeChat]);
 
   useEffect(() => {
     socket = io(SOCKET_ENDPOINT);
     socket.emit("CONNECTED_TO_SOCKET", user);
-  }, []);
+  }, [user]);
 
   // SOCKET LISTENER
   useEffect(() => {
@@ -57,9 +57,14 @@ const ChatArea = () => {
     });
   });
 
+  useEffect(() => {
+    const ele = document.getElementById("scrollDiv");
+    ele.scrollTop = ele.scrollHeight
+  }, [chatMessages]);
+
   return (
     <>
-      <div className="chat-area__container">
+      <div className="chat-area__container" id="scrollDiv">
         <MessageList chatMessages={chatMessages} />
       </div>
       <SendMessage
