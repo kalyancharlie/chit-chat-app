@@ -20,12 +20,13 @@ const ChatList = () => {
     } catch (error) {
       
     }
-  }, [])
+  }, [user])
 
   useEffect(() => {
+    if(!user?._id) return
     fetchUserChats()
    console.log('chatlist rendered with user id change')
-  }, [])
+  }, [fetchUserChats, user?._id])
   
   return (
     <div className='chat-list__container'>
