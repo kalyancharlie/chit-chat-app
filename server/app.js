@@ -20,6 +20,7 @@ const LOG_MODE = MODE === 'prod' ? 'tiny' : 'dev'
 mongo.connect();
 
 const app = express();
+// app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

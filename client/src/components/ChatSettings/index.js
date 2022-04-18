@@ -5,7 +5,6 @@ import SearchUser from './SearchUser'
 import GroupMembersList from './GroupMembersList'
 import {useNavigate} from 'react-router-dom'
 import useAppContext from '../../hooks/useAppContext'
-import useMediaQuery from '../../hooks/useMediaQuery'
 import { BsArrowLeft } from 'react-icons/bs'
 
 const ChatSettings = () => {

@@ -3,8 +3,8 @@ import axios from "axios";
 import log from '../utils/logger'
 
 const API = axios.create({
-  // baseURL: process.env.REACT_APP_API_BASE_URL,
-  baseURL: 'http://localhost:3000',
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+  // baseURL: 'http://localhost:3000',
   withCredentials: true
 });
 
