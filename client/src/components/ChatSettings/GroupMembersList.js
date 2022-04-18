@@ -19,6 +19,7 @@ const GroupMembersList = ({groupMembers, setGroupMembers}) => {
     }
   }
   useEffect(() => {
+    if(!activeChat) return
     fetchGroupMembers()
   }, [activeChat])
   return (

@@ -7,8 +7,6 @@ const server = app.listen(PORT, () => {
     log("App listening on http://localhost:3030")
 })
 
-
-
 // Socket Connection Server
 const io = require("socket.io")(server, {
     pingTimeout: 40000,
@@ -17,7 +15,6 @@ const io = require("socket.io")(server, {
       // credentials: true,
     },
   });
-
 
 io.on("connection", (socket) => {
     console.log("Connected to socket.io Server");
@@ -39,7 +36,8 @@ io.on("connection", (socket) => {
       if (!chatObj?.chat?.users) return console.log("No users Found");
   
       chatObj?.chat?.users.forEach((user) => {
-        if (user._id == chatObj.sender._id) return;
+        if (user?._id === chatObj?.sender?._id) return;
+        console.log("Sending message to: " + user?._id);
         socket.in(user._id).emit("RECEIVED_MESSAGE", chatObj);
       });
     });

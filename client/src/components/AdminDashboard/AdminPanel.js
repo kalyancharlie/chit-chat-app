@@ -55,7 +55,7 @@ const AdminPanel = () => {
       <div className="admin-panel__header">
         <Search setInputValue={setSearchText} textValue={searchText} />
         <button
-          className="admin-add-user-btn btn-reset"
+          className="btn-reset admin-add-user-btn"
           title="Click to Add User"
           onClick={openAddUserModal} 
         >

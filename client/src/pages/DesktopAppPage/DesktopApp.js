@@ -29,7 +29,7 @@ const DesktopApp = () => {
     // <LoginPage />
     <div className="app-container">
       <Chats />
-      <div className="flex fs">
+      <div className="flex fs main-chat-area__screen">
         <ChatScreen />
         <ChatSettings />
       </div>

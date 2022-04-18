@@ -2,6 +2,9 @@ import React, {useEffect} from 'react'
 import {Outlet} from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import useAppContext from '../../hooks/useAppContext';
+import ProfileSettings from '../../components/ProfileSettings'
+import ConfirmModal from '../../components/ConfirmModal'
+import CreateGroupModal from '../../components/Chats/CreateGroupModal'
 
 const MobileApp = () => {
   const navigator = useNavigate();
@@ -22,6 +25,9 @@ const MobileApp = () => {
   return (
     <div className="app-container">
       <Outlet />
+      <ProfileSettings />
+      <CreateGroupModal />
+      <ConfirmModal />
     </div>
   )
 }

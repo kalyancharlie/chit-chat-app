@@ -3,6 +3,8 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
 .open-modal {
@@ -26,4 +28,40 @@
 
 .pointer {
   cursor: pointer;
+}
+
+.main-chat-area__screen {
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .chats__container {
+    width: 100% !important;
+  }
+  .chats__main-container {
+    overflow-y: auto !important;
+  }
+  .chat-screen__container {
+    padding: 1.1rem !important;
+    flex-basis: 100% !important;
+    padding: 0rem !important;
+  }
+  .chat-screen-info__container {
+    padding: 0.5rem 1.8rem;
+    border-radius: 0px !important;
+    margin-bottom: 1rem !important;
+  }
+  .chat-settings__container {
+    width: 100% !important;
+    position: relative !important;
+  }
+  .dashboard-header {
+    padding: 0.4rem !important;
+  }
+  .admin-user-name {
+    font-size: 1.05rem !important;
+  }
+  .admin-add-user-btn {
+    padding: 0.425rem 0.4rem !important;
+  }
 }
