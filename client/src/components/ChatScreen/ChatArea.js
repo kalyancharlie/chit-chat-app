@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import MessageList from "./MessageList";
 import SendMessage from "./SendMessage";
 import ScrollableFeed from "react-scrollable-feed";
@@ -15,7 +15,7 @@ const ChatArea = () => {
   // SOCKET CONNECTION SETUP
 
   // Get Chat Messages
-  const fetchChatMessages = async () => {
+  const fetchChatMessages = useCallback(async () => {
     try {
       const resp = await getChatMessages({ chatId: activeChat?._id });
       if (resp?.status && resp?.messagesData) {
@@ -29,13 +29,13 @@ const ChatArea = () => {
       console.log("error in g etting messages");
       console.log(error);
     }
-  };
+  }, [activeChat]);
 
   useEffect(() => {
     if (!activeChat) return;
     previouChat = activeChat;
     fetchChatMessages();
-  }, [activeChat]);
+  }, [activeChat, fetchChatMessages]);
 
   useEffect(() => {
     socket = io(SOCKET_ENDPOINT);

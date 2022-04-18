@@ -8,7 +8,7 @@ import useMediaQuery from "./hooks/useMediaQuery";
 
 function App() {
   const [activeChat, setActiveChat] = useState(null);
-  const isMobileView = useMediaQuery("(max-width: 450px)");
+  const isMobileView = useMediaQuery("(max-width: 600px)");
   const [chats, setChats] = useState([]);
   const [chatSettings, setChatSettings] = useState(null);
   const [user, setUser] = useState({

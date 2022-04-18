@@ -1,5 +1,5 @@
 import React from "react";
-import { getFirstAndLastName, getMessageTime, isCurrentUser } from "../../utils/util";
+import {  getMessageTime, isCurrentUser } from "../../utils/util";
 import Icon from "../Icon";
 import { BiLike } from 'react-icons/bi'
 import useAppContext from "../../hooks/useAppContext";

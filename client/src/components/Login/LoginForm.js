@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { BiUser } from "react-icons/bi";
 import { VscError, VscLock } from "react-icons/vsc";
 import { IoMdInformationCircle } from "react-icons/io";
@@ -17,10 +17,14 @@ const LoginForm = () => {
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    if (userInfo) {
+    const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'))
+    const isAdmin = JSON.parse(localStorage.getItem('isAdmin'))
+    if (userInfo && userInfo?.token && userInfo?.isAdmin) {
       setUser(() => ({...userInfo}))
+      navigator('/admin-dashboard', {replace: true})
+    } else if (userInfo && userInfo?.token && !userInfo?.isAdmin){
       navigator('/chats', {replace: true})
-    } 
+    }
   }, [])
 
   // Login Type Listener
@@ -40,7 +44,7 @@ const LoginForm = () => {
   };
   
   // Validate Fields
-  const validateFields = () => {
+  const validateFields = useCallback(() => {
     let isInvalid = false
     if(!formState.emailId) {
       setError((prev) => ({...prev, emailId: true}))
@@ -55,7 +59,7 @@ const LoginForm = () => {
       setError((prev) => ({...prev, password: false}))
     }
     return isInvalid
-  }
+  }, [formState])
 
   // Authenticate User
   const authenticateUser = async (e) => {
@@ -64,20 +68,25 @@ const LoginForm = () => {
       if (validateFields()) return
       console.log('user details', formState)
       const loginStatus = await verifyUserLogin({...formState, isAdmin: loginType.isAdmin})
+      console.log('login status', loginStatus)
       if (loginStatus) {
         const {data} = loginStatus
         if (loginType.isAdmin && data.status) {
           const {user} = data
           log('user data', user)
           localStorage.setItem("userInfo", JSON.stringify(user));
+          localStorage.setItem('isLoggedIn', JSON.stringify(true));
+          localStorage.setItem('isAdmin', JSON.stringify(true));
           setUser(() => (user))
-          navigator('/admin-dashboard', {replace:true})
+          return navigator('/admin-dashboard', {replace:true})
         } else if (data.status) {
           const {user} = data
           log('user data', user)
           localStorage.setItem("userInfo", JSON.stringify(user));
+          localStorage.setItem('isLoggedIn', JSON.stringify(true));
+          localStorage.setItem('isAdmin', JSON.stringify(false));
           setUser(() => (user))
-          navigator('/chats', {replace:true})
+          return navigator('/chats', {replace:true})
         }
       }
       log('login status', loginStatus)
@@ -88,7 +97,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     validateFields()
-  }, [formState])
+  }, [formState, validateFields])
 
   return (
     <div className="login-form__container">

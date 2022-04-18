@@ -5,7 +5,7 @@ import log from '../utils/logger'
 const API = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
   // baseURL: 'http://localhost:3000',
-  withCredentials: true
+  // withCredentials: true
 });
 
 API.interceptors.request.use(

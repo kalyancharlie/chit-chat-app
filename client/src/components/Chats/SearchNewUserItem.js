@@ -19,7 +19,7 @@ const SearchNewUserItem = ({
   // Add User to Chat List
   const createChatWithUser = async (e) => {
     if (e) e.preventDefault();
-    setSelectedUserFromSearch(() => _id);
+    setSelectedUserFromSearch(() => (_id));
     // Create Chat API call
     const data = await createOrAccessChat({senderId: user?._id, targetUserId: _id})
     if (data.status && data.chatData) {
@@ -28,10 +28,6 @@ const SearchNewUserItem = ({
     setSearchUserText(() => (''))
     // console.log("chat created", data);
   };
-
-  useEffect(() => {
-    console.log('chats changed', chats)
-  }, [chats])
 
   return (
     <div

@@ -8,11 +8,6 @@ const MessageList = ({ chatMessages }) => {
     return <MessageItem key={messageObj?._id} messageObj={messageObj} />
   })}
   </>
-  // return <>
-  //     {chatMessages.map(messageObj => {
-  //       return <MessageItem {...messageObj} messageObj={messageObj} />
-  //     })}
-  //   </>
 };
 
 export default MessageList;

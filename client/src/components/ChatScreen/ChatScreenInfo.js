@@ -14,7 +14,7 @@ import "./ChatScreen.css";
 
 const ChatScreenInfo = () => {
   const navigator = useNavigate()
-  const isMobileView = useMediaQuery("(max-width: 450px)");
+  const isMobileView = useMediaQuery("(max-width: 550px)");
   const { activeChat, user } = useAppContext();
 
   return (

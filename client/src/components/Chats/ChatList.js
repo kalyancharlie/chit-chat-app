@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import useAppContext from '../../hooks/useAppContext'
 import ChatItem from './ChatItem'
 import {getChats} from '../../api/ChatAPI'
@@ -7,7 +7,7 @@ const ChatList = () => {
   const {user, chats, setChats} = useAppContext()
 
   // Fetch User Chats
-  const fetchUserChats = async () => {
+  const fetchUserChats = useCallback(async () => {
     try {
       const data = await getChats(user?._id)
       console.log('api called', data)
@@ -20,20 +20,12 @@ const ChatList = () => {
     } catch (error) {
       
     }
-  }
-
-  // useEffect(() => {
-    
-  // }, [])
-
-  // useEffect(() => {
-  //  console.log('chatlist rendered with user change')
-  // }, [user])
+  }, [])
 
   useEffect(() => {
     fetchUserChats()
    console.log('chatlist rendered with user id change')
-  }, [user?._id])
+  }, [])
   
   return (
     <div className='chat-list__container'>

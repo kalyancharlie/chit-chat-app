@@ -20,7 +20,8 @@ const MobileAppRoutes = () => {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
-        <Route path="/" exact element={<Navigate replace to="/login" />}>
+        <Route path="/" exact element={<MobileApp />}>
+        <Route path="login" element={<LoginPage />} />
           <Route path="chats" element={<Chats />}></Route>
           <Route path="chats/:chatid" element={<ChatScreen />} />
           <Route path="chats/:chatid/settings" element={<ChatSettings />} />
@@ -28,7 +29,7 @@ const MobileAppRoutes = () => {
           <Route path="profile" element={<ProfileSettings />} />
           <Route path="*" element={<Navigate to="/page-not-found" />} />
         </Route>
-        <Route path="*" element={<Navigate to="/page-not-found" />} />
+        <Route path="*" element={<Navigate to="/login" />} />
         <Route path="/page-not-found" element={<PageNotFound />} />
       </Routes>
     </Router>

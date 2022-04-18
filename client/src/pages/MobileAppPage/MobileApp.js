@@ -16,10 +16,14 @@ const MobileApp = () => {
     if (!userInfo) {
       return navigator("/login", { message: "Session Expired. Login Again" });
     }
-    if (userInfo.token === '' || userInfo?.isAdmin) {
-      return navigator("/login", { message: "Session Expired. Login Again" });
+    if (userInfo.token && userInfo?.isAdmin) {
+      setUser(() => userInfo);
+      return navigator("/admin-dashboard", {replace: true});
+    } else if(userInfo.token && !userInfo?.isAdmin) {
+      setUser(() => userInfo);
+      return navigator("/chats", {replace: true});
     }
-    setUser(() => userInfo);
+    return navigator("/login", { message: "Session Expired. Login Again" });
   }, []);
 
   return (
